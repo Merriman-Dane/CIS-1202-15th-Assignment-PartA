@@ -10,7 +10,7 @@ using namespace std;
 class invalidCharacterException
 {
 	private:
-		char c = NULL;
+		char c;
 	public:
 		invalidCharacterException(char c)
 		{
@@ -26,7 +26,7 @@ class invalidCharacterException
 class invalidRangeException
 {
 	private:
-		int i = NULL;
+		int i;
 	public:
 		invalidRangeException(int i)
 		{
@@ -38,6 +38,36 @@ class invalidRangeException
 			return i;
 		}
 };
+
+// Function Prototype
+char character(char, int);
+
+int main()
+{
+	// Array for test values
+	char cArr[] = { 'a', 'a', 'Z', '?', 'A' };
+	int iArr[] = { 1, -1, -1, 5, 32 };
+
+	for (int i = 0; i < 5; i++)
+	{
+		try
+		{
+			cout << "The result of character('" << cArr[i] << "', " << iArr[i] << ") is: ";
+			cout << character(cArr[i], iArr[i]) << endl;
+		}
+		catch (invalidCharacterException e)
+		{
+			cout << e.getChar() << " is not a valid starting character.\n";
+		}
+		catch (invalidRangeException e)
+		{
+			cout << e.getOffset() << " is not a valid offset.\n";
+		}
+	}
+
+	system("pause");
+	return 0;
+}
 
 char character(char start, int offset)
 {
